@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WealthWise Global — Your Path to Financial Freedom</title>
+
+  <meta name="description" content="WealthWise Global helps you understand, organize and improve your financial life with practical financial education, budgeting tools, income-building strategies and personalized wealth plans.">
+
+  <meta name="theme-color" content="#08110f">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #07100e;
+      color: #f4f1e8;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 16, 14, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232, 184, 75, 0.15);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      font-weight: bold;
+      color: #e8b84b;
+      letter-spacing: 0.3px;
+    }
+
+    .logo span {
+      color: #f4f1e8;
+    }
+
+    .nav-link {
+      color: #d5d1c5;
+      font-size: 14px;
+    }
+
+    .nav-button {
+      background: #e8b84b;
+      color: #10100c;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 85px 0 75px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(232,184,75,0.13), transparent 40%),
+        linear-gradient(180deg, #08110f 0%, #07100e 100%);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid rgba(232,184,75,0.35);
+      border-radius: 50px;
+      color: #e8b84b;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 22px;
+      background: rgba(232,184,75,0.06);
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1.02;
+      max-width: 900px;
+      margin: auto;
+      letter-spacing: -2px;
+    }
+
+    h1 .gold {
+      color: #e8b84b;
+    }
+
+    .hero-text {
+      max-width: 690px;
+      margin: 25px auto 32px;
+      color: #bdb9ad;
+      font-size: 18px;
+    }
+
+    .primary-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #e8b84b, #d4862a);
+      color: #10100c;
+      padding: 16px 27px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 10px 35px rgba(232,184,75,0.18);
+      transition: transform 0.2s ease;
+    }
+
+    .primary-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .secondary-button {
+      display: inline-block;
+      margin-left: 10px;
+      padding: 15px 24px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+      color: #e9e5db;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .trust {
+      margin-top: 25px;
+      color: #858178;
+      font-size: 12px;
+    }
+
+    /* SECTION */
+    section {
+      padding: 75px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 42px;
+    }
+
+    .section-heading h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(30px, 5vw, 46px);
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: #aaa69c;
+    }
+
+    /* ASSESSMENT CARD */
+    .assessment {
+      background: linear-gradient(135deg, #111d19, #0b1714);
+      border: 1px solid rgba(232,184,75,0.2);
+      border-radius: 20px;
+      padding: 45px 30px;
+      text-align: center;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.25);
+    }
+
+    .assessment-icon {
+      font-size: 43px;
+      margin-bottom: 15px;
+    }
+
+    .assessment h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .assessment p {
+      color: #aaa69c;
+      max-width: 650px;
+      margin: 0 auto 25px;
+    }
+
+    .free-label {
+      color: #2ec4a0;
+      font-weight: bold;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 17px;
+    }
+
+    .feature {
+      background: #0d1815;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 15px;
+      padding: 24px 20px;
+      min-height: 185px;
+    }
+
+    .feature-icon {
+      font-size: 29px;
+      margin-bottom: 13px;
+    }
+
+    .feature h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #98958b;
+      font-size: 13px;
+    }
+
+    /* JOURNEY */
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .step {
+      position: relative;
+      padding: 25px 18px;
+      background: #0b1512;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(232,184,75,0.12);
+      color: #e8b84b;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .step h3 {
+      margin-bottom: 7px;
+    }
+
+    .step p {
+      color: #96928a;
+      font-size: 13px;
+    }
+
+    /* MISSION */
+    .mission {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(46,196,160,0.08), transparent 35%),
+        #0b1512;
+      border: 1px solid rgba(46,196,160,0.16);
+      border-radius: 20px;
+      padding: 45px 30px;
+      text-align: center;
+    }
+
+    .mission h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+
+    .mission p {
+      max-width: 700px;
+      margin: auto;
+      color: #aaa69c;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 35px 0;
+      color: #77736b;
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .features,
+      .journey {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-link {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 65px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .features,
+      .journey {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text {
+        font-size: 16px;
+      }
+
+      .primary-button,
+      .secondary-button {
+        display: block;
+        margin: 10px 0;
+        width: 100%;
+      }
+
+      .assessment {
+        padding: 35px 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        WealthWise <span>Global</span>
+      </a>
+
+      <a href="assessment.html" class="nav-link">
+        Free Financial Assessment
+      </a>
+
+      <a href="assessment.html" class="nav-button">
+        Get My Score
+      </a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+
+      <div class="badge">
+        GLOBAL FINANCIAL EDUCATION &amp; WEALTH PLANNING
+      </div>
+
+      <h1>
+        Your Path to
+        <span class="gold">Financial Freedom.</span>
+      </h1>
+
+      <p class="hero-text">
+        Understand your money. Build better financial habits.
+        Discover opportunities. Create a practical path toward
+        the financial future you want.
+      </p>
+
+      <a href="assessment.html" class="primary-button">
+        Take My Free Financial Health Assessment →
+      </a>
+
+      <a href="#features" class="secondary-button">
+        Explore WealthWise
+      </a>
+
+      <div class="trust">
+        Free assessment · About 5 minutes · No account required
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ASSESSMENT -->
+  <section>
+    <div class="container">
+
+      <div class="assessment">
+
+        <div class="assessment-icon">📊</div>
+
+        <div class="free-label">
+          100% FREE FINANCIAL HEALTH ASSESSMENT
+        </div>
+
+        <h2>How healthy is your financial life?</h2>
+
+        <p>
+          Answer 10 simple questions and receive a Financial Health
+          Score with a clear picture of your strengths, weaknesses
+          and the areas that deserve your attention first.
+        </p>
+
+        <a href="assessment.html" class="primary-button">
+          Discover My Financial Score
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FEATURES -->
+  <section id="features">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <h2>One place for your financial journey.</h2>
+
+        <p>
+          WealthWise Global brings practical financial education
+          and planning tools together in one simple experience.
+        </p>
+
+      </div>
+
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">🎓</div>
+          <h3>Finance School</h3>
+          <p>
+            Build financial knowledge through practical,
+            easy-to-understand lessons.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">💰</div>
+          <h3>Budget Builder</h3>
+          <p>
+            Understand where your money goes and create
+            a spending plan that works for you.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">📈</div>
+          <h3>Invest Smart</h3>
+          <p>
+            Learn the fundamentals of investing, risk,
+            diversification and long-term wealth building.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🚀</div>
+          <h3>Earn Online</h3>
+          <p>
+            Explore legitimate ways to develop skills,
+            create value and build additional income.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Goal Planner</h3>
+          <p>
+            Turn important financial goals into practical
+            milestones and actions.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🛡️</div>
+          <h3>Emergency Fund</h3>
+          <p>
+            Learn how to prepare for unexpected expenses
+            and strengthen financial resilience.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">📉</div>
+          <h3>Debt Freedom</h3>
+          <p>
+            Understand debt and explore structured strategies
+            for managing repayment.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Money Coach</h3>
+          <p>
+            Our future AI coaching experience will help you
+            learn, plan and stay accountable.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- JOURNEY -->
+  <section>
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <h2>Your WealthWise journey.</h2>
+
+        <p>
+          Start with understanding. Progress through action.
+          Build toward your goals.
+        </p>
+
+      </div>
+
+
+      <div class="journey">
+
+        <div class="step">
+          <div class="number">1</div>
+          <h3>Discover</h3>
+          <p>
+            Take your free Financial Health Assessment
+            and understand your starting point.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="number">2</div>
+          <h3>Diagnose</h3>
+          <p>
+            Identify the areas where your financial life
+            is strongest and where improvement matters most.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="number">3</div>
+          <h3>Plan</h3>
+          <p>
+            Create practical priorities for the next
+            30, 60 and 90 days.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="number">4</div>
+          <h3>Build</h3>
+          <p>
+            Learn, act, track your progress and continue
+            developing your financial capability.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MISSION -->
+  <section>
+
+    <div class="container">
+
+      <div class="mission">
+
+        <h2>Financial freedom begins with financial clarity.</h2>
+
+        <p>
+          WealthWise Global exists to make financial education,
+          planning and wealth-building knowledge easier to understand
+          and easier to act on—wherever you are in the world.
+        </p>
+
+        <br>
+
+        <a href="assessment.html" class="primary-button">
+          Start With My Free Assessment →
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+        <strong>WealthWise Global</strong><br>
+        Your path to financial freedom.
+      </div>
+
+      <div>
+        Educational information only. Not financial, investment,
+        legal or tax advice.
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
