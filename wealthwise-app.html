@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My WealthWise Dashboard</title>
+
+<meta name="description" content="Your personalized WealthWise financial dashboard and 90-day wealth plan.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#07100e;
+  color:#f4f1e8;
+  line-height:1.6
+}
+
+a{text-decoration:none;color:inherit}
+
+.container{
+  width:min(1100px,92%);
+  margin:auto
+}
+
+/* NAV */
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(7,16,14,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(232,184,75,.15)
+}
+
+.nav-inner{
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px
+}
+
+.logo{
+  font-family:Georgia,serif;
+  font-size:22px;
+  font-weight:bold;
+  color:#e8b84b
+}
+
+.logo span{color:#f4f1e8}
+
+.back{
+  color:#aaa69c;
+  font-size:13px
+}
+
+/* HEADER */
+
+.hero{
+  padding:55px 0 35px;
+  background:
+  radial-gradient(circle at 50% 0%,rgba(232,184,75,.12),transparent 42%)
+}
+
+.eyebrow{
+  color:#2ec4a0;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  margin-bottom:10px
+}
+
+h1{
+  font-family:Georgia,serif;
+  font-size:clamp(32px,7vw,55px);
+  line-height:1.05;
+  margin-bottom:12px
+}
+
+.subtitle{
+  color:#aaa69c;
+  max-width:680px
+}
+
+/* SCORE */
+
+.score-card{
+  margin-top:28px;
+  background:linear-gradient(135deg,#111d19,#0b1714);
+  border:1px solid rgba(232,184,75,.22);
+  border-radius:20px;
+  padding:30px
+}
+
+.score-layout{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:30px;
+  align-items:center
+}
+
+.score-ring{
+  width:155px;
+  height:155px;
+  border-radius:50%;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:8px solid #e8b84b;
+  box-shadow:0 0 35px rgba(232,184,75,.12)
+}
+
+.score-number{
+  font-family:Georgia,serif;
+  font-size:44px;
+  font-weight:bold
+}
+
+.score-label{
+  color:#e8b84b;
+  font-weight:bold;
+  font-size:13px
+}
+
+.goal{
+  color:#2ec4a0;
+  font-weight:bold;
+  margin-top:8px
+}
+
+/* DIAGNOSIS */
+
+section{padding:35px 0}
+
+.section-title{
+  font-family:Georgia,serif;
+  font-size:30px;
+  margin-bottom:8px
+}
+
+.section-intro{
+  color:#96928a;
+  margin-bottom:22px
+}
+
+.diagnosis{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px
+}
+
+.diagnosis-card{
+  background:#0d1815;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:15px;
+  padding:23px
+}
+
+.diagnosis-card h3{
+  margin-bottom:8px
+}
+
+.diagnosis-card p{
+  color:#aaa69c;
+  font-size:14px
+}
+
+.good{color:#2ec4a0}
+.focus{color:#e8b84b}
+
+/* 90 DAY */
+
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px
+}
+
+.phase{
+  background:#0d1815;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:15px;
+  padding:23px
+}
+
+.phase-number{
+  color:#e8b84b;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px
+}
+
+.phase h3{
+  margin:7px 0 9px
+}
+
+.phase p{
+  color:#aaa69c;
+  font-size:14px
+}
+
+.phase ul{
+  margin:14px 0 0 18px;
+  color:#aaa69c;
+  font-size:13px
+}
+
+.phase li{margin-bottom:7px}
+
+/* ACTION */
+
+.action{
+  background:linear-gradient(135deg,#111d19,#0a1512);
+  border:1px solid rgba(46,196,160,.18);
+  border-radius:18px;
+  padding:30px;
+  margin-top:20px
+}
+
+.action h3{
+  margin-bottom:7px
+}
+
+.action p{
+  color:#aaa69c
+}
+
+/* TOOLS */
+
+.tools{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px
+}
+
+.tool{
+  background:#0d1815;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;
+  padding:20px;
+  min-height:155px
+}
+
+.tool-icon{
+  font-size:27px;
+  margin-bottom:9px
+}
+
+.tool h3{
+  font-size:16px;
+  margin-bottom:6px
+}
+
+.tool p{
+  color:#96928a;
+  font-size:12px
+}
+
+/* PREMIUM */
+
+.premium{
+  margin:35px 0;
+  padding:38px 25px;
+  border-radius:20px;
+  text-align:center;
+  background:
+  radial-gradient(circle at 50% 0%,rgba(232,184,75,.12),transparent 55%),
+  #111a17;
+  border:1px solid rgba(232,184,75,.25)
+}
+
+.premium h2{
+  font-family:Georgia,serif;
+  font-size:32px;
+  margin-bottom:10px
+}
+
+.premium p{
+  color:#aaa69c;
+  max-width:650px;
+  margin:0 auto 22px
+}
+
+.button{
+  display:inline-block;
+  background:linear-gradient(135deg,#e8b84b,#d4862a);
+  color:#11100c;
+  padding:14px 23px;
+  border-radius:9px;
+  font-weight:bold
+}
+
+.secondary{
+  display:inline-block;
+  margin-left:8px;
+  padding:13px 21px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:9px;
+  color:#ddd8cd
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:30px 0;
+  color:#77736b;
+  font-size:12px
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .score-layout{
+    grid-template-columns:1fr;
+    text-align:center
+  }
+
+  .diagnosis,
+  .timeline{
+    grid-template-columns:1fr
+  }
+
+  .tools{
+    grid-template-columns:repeat(2,1fr)
+  }
+}
+
+@media(max-width:500px){
+
+  .tools{
+    grid-template-columns:1fr
+  }
+
+  .score-card,
+  .action,
+  .premium{
+    padding:23px
+  }
+
+  .secondary{
+    display:block;
+    margin:10px 0 0
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav-inner">
+
+    <a href="index.html" class="logo">
+      WealthWise <span>Global</span>
+    </a>
+
+    <a href="assessment.html" class="back">
+      ← Assessment
+    </a>
+
+  </div>
+</nav>
+
+
+<main>
+
+<!-- HEADER -->
+
+<section class="hero">
+<div class="container">
+
+  <div class="eyebrow">YOUR PERSONAL WEALTH COMMAND CENTER</div>
+
+  <h1 id="welcome">Welcome to WealthWise.</h1>
+
+  <p class="subtitle">
+    Your assessment has given us a starting point.
+    Now let's turn financial awareness into practical action.
+  </p>
+
+
+  <!-- SCORE CARD -->
+
+  <div class="score-card">
+
+    <div class="score-layout">
+
+      <div class="score-ring">
+        <div class="score-number" id="score">--</div>
+        <div>/ 100</div>
+      </div>
+
+      <div>
+
+        <div class="eyebrow">YOUR FINANCIAL HEALTH SCORE</div>
+
+        <h2 id="scoreLabel">Calculating...</h2>
+
+        <p id="diagnosisText">
+          Preparing your financial profile...
+        </p>
+
+        <div class="goal">
+          Primary goal: <span id="goal">Your financial goal</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- DIAGNOSIS -->
+
+<section>
+<div class="container">
+
+  <h2 class="section-title">Your Financial Diagnosis</h2>
+
+  <p class="section-intro">
+    Your score is not a judgment. It is a starting point.
+    WealthWise uses it to help you decide what deserves attention first.
+  </p>
+
+
+  <div class="diagnosis">
+
+    <div class="diagnosis-card">
+
+      <h3 class="good">
+        ✦ Your strongest area
+      </h3>
+
+      <p id="strongest">
+        Analysing your results...
+      </p>
+
+    </div>
+
+
+    <div class="diagnosis-card">
+
+      <h3 class="focus">
+        ◆ Your biggest opportunity
+      </h3>
+
+      <p id="weakest">
+        Analysing your results...
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="action">
+
+    <h3>🎯 Your first WealthWise action</h3>
+
+    <p id="firstAction">
+      Start by reviewing your financial priorities and
+      identifying one action you can complete this week.
+    </p>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- 90 DAY PLAN -->
+
+<section>
+<div class="container">
+
+  <h2 class="section-title">Your 90-Day Wealth Mission</h2>
+
+  <p class="section-intro">
+    Wealth is built through consistent decisions, not one giant move.
+    Your first 90 days are divided into three practical phases.
+  </p>
+
+
+  <div class="timeline">
+
+    <div class="phase">
+
+      <div class="phase-number">DAYS 1–30</div>
+
+      <h3>Stabilise</h3>
+
+      <p>
+        Understand your money and strengthen the foundation.
+      </p>
+
+      <ul>
+        <li>Track income and expenses</li>
+        <li>Create a realistic spending plan</li>
+        <li>Identify financial leaks</li>
+        <li>Set your first measurable target</li>
+      </ul>
+
+    </div>
+
+
+    <div class="phase">
+
+      <div class="phase-number">DAYS 31–60</div>
+
+      <h3>Strengthen</h3>
+
+      <p>
+        Improve resilience and reduce financial pressure.
+      </p>
+
+      <ul>
+        <li>Build emergency savings</li>
+        <li>Develop a debt strategy if needed</li>
+        <li>Improve financial knowledge</li>
+        <li>Explore additional income skills</li>
+      </ul>
+
+    </div>
+
+
+    <div class="phase">
+
+      <div class="phase-number">DAYS 61–90</div>
+
+      <h3>Build</h3>
+
+      <p>
+        Begin building toward longer-term financial goals.
+      </p>
+
+      <ul>
+        <li>Review your financial progress</li>
+        <li>Strengthen your savings habit</li>
+        <li>Learn investment fundamentals</li>
+        <li>Create your next 90-day target</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- TOOLS -->
+
+<section>
+<div class="container">
+
+  <h2 class="section-title">Your WealthWise Toolkit</h2>
+
+  <p class="section-intro">
+    Practical tools designed to help you move from knowledge to action.
+  </p>
+
+
+  <div class="tools">
+
+    <div class="tool">
+      <div class="tool-icon">💰</div>
+      <h3>Budget Builder</h3>
+      <p>
+        Build a simple plan for your income and spending.
+      </p>
+    </div>
+
+
+    <div class="tool">
+      <div class="tool-icon">🛡️</div>
+      <h3>Emergency Fund</h3>
+      <p>
+        Learn how to build financial resilience.
+      </p>
+    </div>
+
+
+    <div class="tool">
+      <div class="tool-icon">📉</div>
+      <h3>Debt Freedom</h3>
+      <p>
+        Organise your debts and understand repayment strategies.
+      </p>
+    </div>
+
+
+    <div class="tool">
+      <div class="tool-icon">🚀</div>
+      <h3>Income Builder</h3>
+      <p>
+        Explore skills and legitimate income opportunities.
+      </p>
+    </div>
+
+
+    <div class="tool">
+      <div class="tool-icon">🎯</div>
+      <h3>Goal Planner</h3>
+      <p>
+        Turn financial goals into measurable milestones.
+      </p>
+    </div>
+
+
+    <div class="tool">
+      <div class="tool-icon">🎓</div>
+      <h3>Finance School</h3>
+      <p>
+        Develop practical financial knowledge step by step.
+      </p>
+    </div>
+
+
+    <div class="tool">
+      <div class="tool-icon">📈</div>
+      <h3>Invest Smart</h3>
+      <p>
+        Learn investment principles, risk and diversification.
+      </p>
+    </div>
+
+
+    <div class="tool">
+      <div class="tool-icon">🤖</div>
+      <h3>AI Money Coach</h3>
+      <p>
+        Coming later: an AI-powered educational money coach.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- PREMIUM -->
+
+<section>
+<div class="container">
+
+  <div class="premium">
+
+    <div class="eyebrow">
+      WEALTHWISE PREMIUM
+    </div>
+
+    <h2>Go beyond your score.</h2>
+
+    <p>
+      The free assessment gives you clarity about your starting point.
+      The future WealthWise experience will help you turn that clarity
+      into a structured, trackable financial journey.
+    </p>
+
+    <a href="assessment.html" class="button">
+      Review My Assessment
+    </a>
+
+    <a href="index.html" class="secondary">
+      Back to Home
+    </a>
+
+  </div>
+
+</div>
+</section>
+
+</main>
+
+
+<footer>
+<div class="container">
+
+  <strong>WealthWise Global</strong><br><br>
+
+  Educational information only. WealthWise Global is not a bank,
+  broker, investment adviser, tax adviser or financial institution.
+  Information provided through this platform is for educational
+  purposes and does not guarantee financial results.
+
+</div>
+</footer>
+
+
+<script>
+
+/*
+  WEALTHWISE DASHBOARD
+  Reads the assessment result saved by assessment.html
+*/
+
+(function(){
+
+  var data = null;
+
+  try {
+    var saved = sessionStorage.getItem("ww_score");
+
+    if(saved){
+      data = JSON.parse(saved);
+    }
+  } catch(e) {
+    data = null;
+  }
+
+
+  /*
+    If there is no saved assessment,
+    allow the visitor to return to the assessment.
+  */
+
+  if(!data){
+
+    document.getElementById("score").textContent = "--";
+
+    document.getElementById("scoreLabel").textContent =
+      "Complete your assessment first";
+
+    document.getElementById("diagnosisText").textContent =
+      "Your personalised WealthWise dashboard will appear here after you complete the free Financial Health Assessment.";
+
+    document.getElementById("goal").textContent =
+      "Not yet available";
+
+    document.getElementById("strongest").textContent =
+      "Complete the assessment to identify your strongest financial area.";
+
+    document.getElementById("weakest").textContent =
+      "Complete the assessment to identify your biggest opportunity.";
+
+    document.getElementById("firstAction").textContent =
+      "Return to the free assessment and answer the 10 questions.";
+
+    return;
+  }
+
+
+  var score = Number(data.score) || 0;
+
+  document.getElementById("score").textContent = score;
+
+
+  /* SCORE LABEL */
+
+  var label = "";
+
+  if(score >= 80){
+    label = "Strong Foundation";
+  }
+  else if(score >= 60){
+    label = "Making Progress";
+  }
+  else if(score >= 40){
+    label = "Building Blocks";
+  }
+  else{
+    label = "Starting Point";
+  }
+
+  document.getElementById("scoreLabel").textContent = label;
+
+
+  /* GENERAL DIAGNOSIS */
+
+  var diagnosis = "";
+
+  if(score >= 80){
+    diagnosis =
+      "You have a strong financial foundation. Your next opportunity is to strengthen consistency, long-term planning and wealth-building knowledge.";
+  }
+  else if(score >= 60){
+    diagnosis =
+      "You are making progress. A few focused improvements could strengthen your financial resilience and move you toward your longer-term goals.";
+  }
+  else if(score >= 40){
+    diagnosis =
+      "You are building the foundations of financial health. Focus on a few high-impact habits before trying to tackle everything at once.";
+  }
+  else{
+    diagnosis =
+      "You are at the beginning of your financial improvement journey. Start with clarity, cash-flow awareness and one manageable action at a time.";
+  }
+
+  document.getElementById("diagnosisText").textContent = diagnosis;
+
+
+  /* GOAL */
+
+  var goalNames = {
+    budget:"Build a better budget",
+    emergency:"Build an emergency fund",
+    debt:"Reduce or eliminate debt",
+    income:"Increase my income",
+    invest:"Start
