@@ -713,16 +713,36 @@ footer{
 
   var data = null;
 
-  try {
-    var saved = sessionStorage.getItem("ww_score");
 
-    if(saved){
-      data = JSON.parse(saved);
-    }
-  } catch(e) {
-    data = null;
+
+  try {
+  var saved = sessionStorage.getItem("ww_score");
+
+  if (!saved) {
+    saved = localStorage.getItem("ww_score");
   }
 
+  if (saved) {
+    data = JSON.parse(saved);
+  }
+
+  // Final fallback: read the score directly from the URL
+  if (!data) {
+    var params = new URLSearchParams(window.location.search);
+    var urlScore = params.get("score");
+    var urlGoal = params.get("goal");
+
+    if (urlScore) {
+      data = {
+        score: Number(urlScore),
+        goal: urlGoal || ""
+      };
+    }
+  }
+
+} catch(e) {
+  data = null;
+}
 
   /*
     If there is no saved assessment,
