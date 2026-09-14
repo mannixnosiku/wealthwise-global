@@ -815,24 +815,37 @@ function showScore() {
   }, 150);
 }
 
+  
 // ══════════════════════════════════════════
 //  ACTIONS
 // ══════════════════════════════════════════
-function goToApp() {
-  // Phase 5 will pass score via URL param or session storage
-  // Architect: score passed as query param so Phase 5 auth can pick it up
-  var result = calculateScore();
-  try {
-    sessionStorage.setItem('ww_score', JSON.stringify({
-      score: result.overall,
-      dims: result.dims,
-      goal: answers.goal,
-      ts: Date.now()
-    }));
-  } catch(e) {}
-  window.location.href = APP_URL + '?score=' + result.overall;
-}
 
+
+  function goToApp() {
+  var result = calculateScore();
+
+  var payload = {
+    score: result.overall,
+    dims: result.dims,
+    goal: answers.goal,
+    ts: Date.now()
+  };
+
+  try {
+    sessionStorage.setItem('ww_score', JSON.stringify(payload));
+  } catch(e) {}
+
+  try {
+    localStorage.setItem('ww_score', JSON.stringify(payload));
+  } catch(e) {}
+
+  window.location.href =
+    APP_URL +
+    '?score=' +
+    encodeURIComponent(result.overall) +
+    '&goal=' +
+    encodeURIComponent(answers.goal || '');
+}
 function retakeAssessment() {
   answers = {};
   currentStep = 0;
