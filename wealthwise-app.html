@@ -744,6 +744,65 @@ footer{
   data = null;
 }
 
+
+try {
+
+  /* First try session storage */
+  var saved = sessionStorage.getItem("ww_score");
+
+  if (saved) {
+    data = JSON.parse(saved);
+  }
+
+  /* Then try local storage */
+  if (!data) {
+    saved = localStorage.getItem("ww_score");
+
+    if (saved) {
+      data = JSON.parse(saved);
+    }
+  }
+
+  /* Finally use the URL */
+  var params = new URLSearchParams(window.location.search);
+  var urlScore = params.get("score");
+  var urlGoal = params.get("goal");
+
+  if (urlScore !== null && urlScore !== "") {
+
+    data = data || {};
+
+    data.score = Number(urlScore);
+
+    if (urlGoal) {
+      data.goal = urlGoal;
+    }
+  }
+
+} catch(e) {
+
+  /* URL fallback even if storage fails */
+  try {
+
+    var params = new URLSearchParams(window.location.search);
+    var urlScore = params.get("score");
+    var urlGoal = params.get("goal");
+
+    if (urlScore !== null && urlScore !== "") {
+      data = {
+        score: Number(urlScore),
+        goal: urlGoal || ""
+      };
+    }
+
+  } catch(err) {
+    data = null;
+  }
+
+}
+
+  
+
   /*
     If there is no saved assessment,
     allow the visitor to return to the assessment.
