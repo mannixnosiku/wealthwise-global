@@ -513,7 +513,7 @@ footer{
         <li>Identify financial leaks</li>
         <li>Set your first measurable target</li>
       </ul>
-
+by
     </div>
 
 
@@ -834,8 +834,9 @@ try {
   }
 
 
-  var score = Number(data.score) || 0;
-
+  
+var score = Number(data.score || new URLSearchParams(window.location.search).get("score")) || 0;
+  
   document.getElementById("score").textContent = score;
 
 
