@@ -485,82 +485,179 @@ footer{
 <!-- 90 DAY PLAN -->
 
 <section>
-<div class="container">
+  <div class="container">
 
-  <h2 class="section-title">Your 90-Day Wealth Mission</h2>
+    <h2 class="section-title">Your Personal 90-Day Wealth Mission</h2>
 
-  <p class="section-intro">
-    Wealth is built through consistent decisions, not one giant move.
-    Your first 90 days are divided into three practical phases.
-  </p>
+    <p class="section-intro" id="planIntro">
+      Your plan is built around your current financial starting point and your personal goal.
+    </p>
 
+    <div class="timeline">
 
-  <div class="timeline">
+      <div class="phase">
+        <div class="phase-number">DAYS 1–30</div>
+        <h3>Stabilise</h3>
+        <p id="phase1Text">
+          Build a clear picture of your money and establish a practical foundation.
+        </p>
+        <ul id="phase1List">
+          <li>Track your income and expenses</li>
+          <li>Identify unnecessary spending</li>
+          <li>Set a realistic financial target</li>
+          <li>Start one consistent money habit</li>
+        </ul>
+      </div>
 
-    <div class="phase">
+      <div class="phase">
+        <div class="phase-number">DAYS 31–60</div>
+        <h3>Strengthen</h3>
+        <p id="phase2Text">
+          Strengthen your financial resilience and improve your money knowledge.
+        </p>
+        <ul id="phase2List">
+          <li>Build your savings habit</li>
+          <li>Review your progress</li>
+          <li>Learn the fundamentals of your chosen financial goal</li>
+          <li>Reduce avoidable financial pressure</li>
+        </ul>
+      </div>
 
-      <div class="phase-number">DAYS 1–30</div>
-
-      <h3>Stabilise</h3>
-
-      <p>
-        Understand your money and strengthen the foundation.
-      </p>
-
-      <ul>
-        <li>Track income and expenses</li>
-        <li>Create a realistic spending plan</li>
-        <li>Identify financial leaks</li>
-        <li>Set your first measurable target</li>
-      </ul>
-by
-    </div>
-
-
-    <div class="phase">
-
-      <div class="phase-number">DAYS 31–60</div>
-
-      <h3>Strengthen</h3>
-
-      <p>
-        Improve resilience and reduce financial pressure.
-      </p>
-
-      <ul>
-        <li>Build emergency savings</li>
-        <li>Develop a debt strategy if needed</li>
-        <li>Improve financial knowledge</li>
-        <li>Explore additional income skills</li>
-      </ul>
-
-    </div>
-
-
-    <div class="phase">
-
-      <div class="phase-number">DAYS 61–90</div>
-
-      <h3>Build</h3>
-
-      <p>
-        Begin building toward longer-term financial goals.
-      </p>
-
-      <ul>
-        <li>Review your financial progress</li>
-        <li>Strengthen your savings habit</li>
-        <li>Learn investment fundamentals</li>
-        <li>Create your next 90-day target</li>
-      </ul>
+      <div class="phase">
+        <div class="phase-number">DAYS 61–90</div>
+        <h3>Build</h3>
+        <p id="phase3Text">
+          Turn your new habits into a repeatable long-term financial system.
+        </p>
+        <ul id="phase3List">
+          <li>Review your 90-day progress</li>
+          <li>Strengthen your savings or investing routine</li>
+          <li>Set your next measurable financial target</li>
+          <li>Create a plan for the next 90 days</li>
+        </ul>
+      </div>
 
     </div>
-
   </div>
-
-</div>
 </section>
 
+<script>
+(function () {
+
+  var score = 0;
+  var goal = "";
+
+  try {
+    var params = new URLSearchParams(window.location.search);
+
+    if (params.get("score")) {
+      score = Number(params.get("score")) || 0;
+    }
+
+    goal = params.get("goal") || "";
+
+  } catch (e) {}
+
+  try {
+    var saved = localStorage.getItem("ww_score");
+
+    if (saved) {
+      var data = JSON.parse(saved);
+
+      if (!score && data.score) {
+        score = Number(data.score) || 0;
+      }
+
+      if (!goal && data.goal) {
+        goal = data.goal;
+      }
+    }
+  } catch (e) {}
+
+  var goalText = {
+    "Build a better budget":
+      "Build a practical budget that gives you greater control over your income and spending.",
+
+    "Build an emergency fund":
+      "Create a consistent savings habit and work toward a financial safety buffer.",
+
+    "Reduce or eliminate debt":
+      "Understand your debt position and develop a structured approach to reducing financial pressure.",
+
+    "Increase my income":
+      "Explore practical ways to strengthen your income and develop additional income-producing skills.",
+
+    "Start saving or investing":
+      "Build a consistent saving habit while learning the fundamentals of responsible long-term investing.",
+
+    "Achieve a financial goal":
+      "Turn your financial goal into smaller, measurable actions that you can work on consistently."
+  };
+
+  var intro = document.getElementById("planIntro");
+
+  if (intro) {
+    intro.textContent =
+      goalText[goal] ||
+      "Your plan is built around your current financial starting point and your personal goal.";
+  }
+
+  /*
+   * SCORE-BASED PERSONALISATION
+   */
+
+  if (score < 40) {
+
+    document.getElementById("phase1Text").textContent =
+      "Focus first on understanding your cash flow and establishing one simple financial habit.";
+
+    document.getElementById("phase2Text").textContent =
+      "Build stability by strengthening savings, controlling spending and improving financial knowledge.";
+
+    document.getElementById("phase3Text").textContent =
+      "Once the foundation is stronger, begin working toward your longer-term financial objective.";
+
+  } else if (score < 60) {
+
+    document.getElementById("phase1Text").textContent =
+      "You already have some building blocks. Focus on strengthening your money habits and creating consistency.";
+
+    document.getElementById("phase2Text").textContent =
+      "Turn your good intentions into measurable progress through saving, planning and financial education.";
+
+    document.getElementById("phase3Text").textContent =
+      "Build a repeatable financial routine and prepare your next 90-day target.";
+
+  } else if (score < 80) {
+
+    document.getElementById("phase1Text").textContent =
+      "Strengthen the areas where your financial foundation can still improve.";
+
+    document.getElementById("phase2Text").textContent =
+      "Increase consistency in saving, planning and responsible financial decision-making.";
+
+    document.getElementById("phase3Text").textContent =
+      "Move from financial stability toward deliberate long-term wealth building.";
+
+  } else {
+
+    document.getElementById("phase1Text").textContent =
+      "Maintain the strong financial habits that contributed to your current foundation.";
+
+    document.getElementById("phase2Text").textContent =
+      "Refine your strategy, strengthen resilience and deepen your financial knowledge.";
+
+    document.getElementById("phase3Text").textContent =
+      "Focus on long-term goals, disciplined wealth building and continuous improvement.";
+
+  }
+
+})();
+</script>
+
+
+
+  
 
 <!-- TOOLS -->
 
