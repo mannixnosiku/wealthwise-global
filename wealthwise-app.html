@@ -883,12 +883,83 @@ var score = Number(data.score || new URLSearchParams(window.location.search).get
 
   document.getElementById("diagnosisText").textContent = diagnosis;
 
-
-  /* GOAL */
+   /* GOAL */
 
   var goalNames = {
-    budget:"Build a better budget",
-    emergency:"Build an emergency fund",
-    debt:"Reduce or eliminate debt",
-    income:"Increase my income",
-    invest:"Start
+    budget: "Build a better budget",
+    emergency: "Build an emergency fund",
+    debt: "Reduce or eliminate debt",
+    income: "Increase my income",
+    invest: "Start saving or investing",
+    goal: "Achieve a financial goal"
+  };
+
+  var goal = data.goal || "";
+
+  document.getElementById("goal").textContent =
+    goalNames[goal] || goal || "Your financial goal";
+
+  /* STRONGEST AND WEAKEST AREA */
+
+  var dims = data.dims || {};
+
+  var dimensionNames = {
+    cashflow: "Cash flow",
+    emergency: "Emergency fund",
+    debt: "Debt management",
+    savings: "Savings",
+    income_diversity: "Income diversity",
+    knowledge: "Financial knowledge",
+    goal_clarity: "Goal clarity",
+    investment: "Investment readiness"
+  };
+
+  var strongest = "Overall financial foundation";
+  var weakest = "Overall financial foundation";
+
+  var values = Object.keys(dims);
+
+  if (values.length) {
+    var strongestKey = values[0];
+    var weakestKey = values[0];
+
+    values.forEach(function(key) {
+      if (Number(dims[key]) > Number(dims[strongestKey])) {
+        strongestKey = key;
+      }
+
+      if (Number(dims[key]) < Number(dims[weakestKey])) {
+        weakestKey = key;
+      }
+    });
+
+    strongest = dimensionNames[strongestKey] || strongestKey;
+    weakest = dimensionNames[weakestKey] || weakestKey;
+  }
+
+  document.getElementById("strongest").textContent =
+    strongest + " is currently one of your stronger areas based on your assessment.";
+
+  document.getElementById("weakest").textContent =
+    weakest + " deserves focused attention as you continue your WealthWise journey.";
+
+  /* FIRST ACTION */
+
+  var firstAction =
+    score >= 80
+      ? "Maintain your strong habits and begin focusing on long-term wealth building."
+      : score >= 60
+      ? "Choose one area that needs improvement and turn it into a measurable 30-day action."
+      : score >= 40
+      ? "Start by tracking your income and expenses and choose one financial habit to strengthen this week."
+      : "Begin by understanding your cash flow and choosing one small financial action you can complete this week.";
+
+  document.getElementById("firstAction").textContent = firstAction;
+
+})();
+</script>
+
+</body>
+</html> 
+
+ 
